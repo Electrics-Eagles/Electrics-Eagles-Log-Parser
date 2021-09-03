@@ -21,7 +21,7 @@ namespace ElectricsEaglesWinFormsLogAnalyserFramework
             for (int i = 1; i < array.Length; i++)
             {
                 {
-                    var data = array[i].Replace("::", ";").Split(';');
+                    var data = array[i].Split(',');
                     if (data.Length > 20)
                     {
 
