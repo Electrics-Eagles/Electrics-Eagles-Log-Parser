@@ -11,7 +11,9 @@ namespace ElectricsEaglesWinFormsLogAnalyserFramework
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
+           Application.EnableVisualStyles();
+
+
             try
             {
                 Application.Run(new Form1());

@@ -29,6 +29,8 @@ namespace ElectricsEaglesWinFormsLogAnalyserFramework
 
           
             InitializeComponent();
+            PluginAPI pluginAPI = new PluginAPI();
+            Console.WriteLine(pluginAPI.detect_plugins());
             add_checkbox();
             this.Size = new System.Drawing.Size(Screen.AllScreens[0].WorkingArea.Width, Screen.AllScreens[0].WorkingArea.Height);
             form_chart = this.chart1;
@@ -123,6 +125,7 @@ namespace ElectricsEaglesWinFormsLogAnalyserFramework
                 List<List<Int32>> main = new List<List<Int32>>();
                 var info = new List<KeyValuePair<int, int>>();
 
+                List<List<Int32>> to_pickle = new List<List<Int32>>();
 
                 List<Int32> index = new List<Int32>();
                 List<Int32> display = new List<Int32>();
@@ -138,6 +141,8 @@ namespace ElectricsEaglesWinFormsLogAnalyserFramework
                     }
 
                 }
+
+
                 var count = display.Count;
                 for (int d = 0; d < checkBoxes.Count; d++)
                 {
@@ -153,13 +158,32 @@ namespace ElectricsEaglesWinFormsLogAnalyserFramework
                     main.Add(list);
 
                 }
+                
+                     foreach(int z in display.ToArray())
+                    {
+                    to_pickle.Add(main[z]);
+                    }
+
+            /////////        }
+
+               
+
                 for (int f = 0; f < data.Count; f++)
                 {
                     index.Add(f);
                 }
 
-                var main_count = main.Count;
+               
+                 if(checkBox2.Checked ==true)
+                {
 
+                    PluginAPI pluginAPI = new PluginAPI();
+                    pluginAPI.make_pickle(to_pickle);
+                    pluginAPI.generate_form();
+
+
+
+                }
                 zoom(chart1.ChartAreas.Count - 1);
                 for (int d = 0; d < display.Count; d++)
                 {
