@@ -38,7 +38,7 @@ namespace ElectricsEaglesWinFormsLogAnalyserFramework
             label3.Text = "Theme in usage :  Windows Default";
             label1.Text = "Runing on: " + new ComputerInfo().OSFullName;
 
-            label2.Text = "Version:" + " v1.0.2 x64 Bit . ";
+            label2.Text = "Version:" + " v1.0.3 x64 Bit . ";
         }
 
         private void label4_Click(object sender, EventArgs e)

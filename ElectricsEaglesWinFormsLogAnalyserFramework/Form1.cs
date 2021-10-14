@@ -238,12 +238,15 @@ namespace ElectricsEaglesWinFormsLogAnalyserFramework
                 mySeries.ChartType = SeriesChartType.Line;
                 mySeries.LegendText = names[i];
                 mySeries.BorderWidth = trackBar1.Value;
+               
                 chart1.Series.Add(mySeries);
             }
             Console.WriteLine("logg");
             Thread serialRead = new Thread(serialThread_Call);
             serialRead.Start();
+            
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -258,6 +261,14 @@ namespace ElectricsEaglesWinFormsLogAnalyserFramework
             printPreviewDialog1.ShowDialog();
             printDialog1.Document = chart1.Printing.PrintDocument;
             printDialog1.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            chart1.Series.Clear();
+            was_used_before = false;
+            button1_Click(sender,e);
+
         }
     }
 }
