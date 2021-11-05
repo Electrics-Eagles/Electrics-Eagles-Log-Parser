@@ -1,0 +1,10 @@
+.checkboxes {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 20px;
+}
+.btn-styled  {
+  width: 100px;
+  margin: 0 auto;
+}
