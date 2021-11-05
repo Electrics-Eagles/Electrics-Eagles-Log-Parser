@@ -10,7 +10,7 @@ use parser::parser;
 use std::mem;
 #[tauri::command]
 
-fn get_selected(invoke_message: Vec<i32>) {
+fn get_selected(invoke_message: Vec<i32>) -> Vec<Vec<f32>>{
   unsafe {
   let _result=parser(",".to_string(),file_select().to_string());
   let mut _final_to_display:Vec<Vec<f32>>= Vec::new();
@@ -21,12 +21,11 @@ fn get_selected(invoke_message: Vec<i32>) {
 
   }
 
-println!("{:#?}",_final_to_display.len());
+return _final_to_display
  
 }
 
 }
-
 
 
 

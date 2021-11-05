@@ -29,10 +29,26 @@ function select_file() {
 function sellected_api() {
   // body...
 
-  invoke('get_selected', { invokeMessage: sellected })
+  invoke('get_selected', { invokeMessage: sellected }).then((message) => perpare_plot(message))
+
+ 
+
 
 }
 
+function perpare_plot(argument) {
+   var trace1 = {
+  x: argument[0],
+  y: argument[1],
+  type: 'scatter'
+};
+
+
+var data = [trace1];
+
+Plotly.newPlot('tester', data);
+  // body...
+}
   </script>
 
   
