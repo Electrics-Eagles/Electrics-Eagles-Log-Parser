@@ -35,11 +35,18 @@ function sellected_api() {
 
 
 }
-
+function generate_array(size){
+  var array=[];
+  for(let x=0; x<size; x++){
+    array.push(x);
+  }
+  return array;
+}
 function perpare_plot(argument) {
+  var array=argument[1];
    var trace1 = {
-  x: argument[0],
-  y: argument[1],
+  x: generate_array(array.length),
+  y: array,
   type: 'scatter'
 };
 
@@ -57,6 +64,7 @@ Plotly.newPlot('tester', data);
     <header>
         <div id="checkboxes">
           <ul class="checkbox"> 
+          
 
         </div>
         <div id="tester" style="width:600px;height:250px;"></div>
@@ -66,6 +74,7 @@ Plotly.newPlot('tester', data);
     <button  onclick="sellected_api()"> Save</button>
     <footer></footer>
     <script>
+
 
 </script>
   </body>
