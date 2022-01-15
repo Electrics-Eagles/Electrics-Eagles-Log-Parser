@@ -42,16 +42,32 @@ function generate_array(size){
   }
   return array;
 }
+
+
+ function size(input_array) {
+    let y_array=[];
+    for(let a=0; a<input_array.length; a++){
+      y_array.push(a);
+    }
+    return y_array;
+  }
 function perpare_plot(argument) {
-  var array=argument[1];
-   var trace1 = {
-  x: generate_array(array.length),
-  y: array,
-  type: 'scatter'
-};
+
+var  data=[];
+  let labels=["a","b","c"];
+  for (let a =0 ; a<argument.length; a++){
+    var trace = {
+      x:size(argument[a]),
+      y:(argument[a]),
+      type: 'scatter',
+      name:labels[a]
+    };
+
+    data.push(trace)
+
+  }
 
 
-var data = [trace1];
 
 Plotly.newPlot('tester', data);
   // body...
