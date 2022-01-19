@@ -10,12 +10,22 @@
   <script type="text/javascript">
       const invoke = window.__TAURI__.invoke
     sellected=[]
-
     var amount_times_pressed=0;
 names = [ "acc_x", "acc_y", "acc_z", "gyro_x", "gyro_y", "gyro_z", "angle_pitch_acc", "angle_roll_acc", "esc_1", "esc_2", "esc_3", "esc_4", "reciver_ch1", "reciver_ch2", "reciver_ch3", "reciver_ch4", "reciver_ch5", "reciver_ch6", "pid_output_pitch", "pid_output_roll", "pid_pitch_setpoint", "pid_roll_setpoint", "pid_yaw_setpoint", "pitch_level_correction", "roll_level_correction", "time_spent", "temp" ]
   function init() {
   for (let i = 0; i < names.length; i++) {
-    $('#checkboxes').append('<li><input type="checkbox" class="btn-styled" onclick="onCheck('+i+')" type="button">'+names[i]+'</input></li>');
+    let checkbox_id="checkbox_"+i;
+    let generated_html=`'<li><input type="checkbox" class="btn-styled" id="${checkbox_id}"  type="button">'${names[i]}+'</input></li>'`
+    $('#checkboxes').append(generated_html);
+    const checkbox = document.getElementById(checkbox_id)
+checkbox.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+    sellected.push(i)
+  } else {
+  arr = sellected.filter(item => item !== i);
+  sellected=arr;
+  }
+});
   }
 }
 var update = {
@@ -43,13 +53,15 @@ function select_file() {
 
 function sellected_api() {
   if(amount_times_pressed != 0 ){
-   document.getElementById("tester").remove()
+   document.getElementById("tester").remove();
+   $('#output_graph').append('<div id="tester" style="width:600px;height:250px;"></div>');
+   Plotly.newPlot('tester', update);
    invoke('get_selected', { invokeMessage: sellected }).then((message) => perpare_plot(message,sellected))
   }
   else {
  invoke('get_selected', { invokeMessage: sellected }).then((message) => perpare_plot(message,sellected))
   }
- 
+
  amount_times_pressed=amount_times_pressed+1;
 }
 function generate_array(size){
@@ -59,8 +71,6 @@ function generate_array(size){
   }
   return array;
 }
-
-
  function size(input_array) {
     let y_array=[];
     for(let a=0; a<input_array.length; a++){
@@ -81,23 +91,23 @@ var  data=[];
     data.push(trace)
   }
 
-
-
 Plotly.newPlot('tester', data);
   // body...
 }
   </script>
 
-  
+
   <body onload="init()">
     <button onclick="select_file()">Open log</button>
     <header>
         <div id="checkboxes">
-          <ul class="checkbox"> 
-          
+          <ul class="checkbox">
+
 
         </div>
+        <div id="output_graph">
         <div id="tester" style="width:600px;height:250px;"></div>
+      </div>
     </header>
     <main></main>
 
