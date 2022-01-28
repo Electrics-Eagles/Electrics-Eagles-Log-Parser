@@ -3,19 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-   <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="./jquery.js"></script>
+    <script src="./plotly.js"></script>
    <link rel="stylesheet" href="styles.css"></link>
   </head>
   <script type="text/javascript">
+
       const invoke = window.__TAURI__.invoke
+
+      const buttons = document.getElementsByTagName("button");
+for (const button of buttons) {
+  button.addEventListener("click", createRipple);
+}
     sellected=[]
     var amount_times_pressed=0;
 names = [ "acc_x", "acc_y", "acc_z", "gyro_x", "gyro_y", "gyro_z", "angle_pitch_acc", "angle_roll_acc", "esc_1", "esc_2", "esc_3", "esc_4", "reciver_ch1", "reciver_ch2", "reciver_ch3", "reciver_ch4", "reciver_ch5", "reciver_ch6", "pid_output_pitch", "pid_output_roll", "pid_pitch_setpoint", "pid_roll_setpoint", "pid_yaw_setpoint", "pitch_level_correction", "roll_level_correction", "time_spent", "temp" ]
   function init() {
   for (let i = 0; i < names.length; i++) {
     let checkbox_id="checkbox_"+i;
-    let generated_html=`'<li><input type="checkbox" class="btn-styled" id="${checkbox_id}"  type="button">'${names[i]}+'</input></li>'`
+    let generated_html=`<li><input type="checkbox" class="btn-styled" style="list-style-type: none;" id="${checkbox_id}"  type="button">${names[i]}</input></li>`
     $('#checkboxes').append(generated_html);
     const checkbox = document.getElementById(checkbox_id)
 checkbox.addEventListener('change', (event) => {
@@ -28,40 +34,36 @@ checkbox.addEventListener('change', (event) => {
 });
   }
 }
-var update = {
-  title: 'New Title',
-  'xaxis.range': [0,1],
-  yaxis: {
-    showgrid: true,
-    zeroline: true,
-    showline: true,
-    mirror: 'ticks',
-    gridcolor: '#bdbdbd',
-    gridwidth: 2,
-    zerolinecolor: '#969696',
-    //zerolinewidth: 4,
-  }
-}
 function onCheck(num){
-console.log(num);
 sellected.push(num)
 }
-
-function select_file() {
-   invoke('select_file')
-}
-
 function sellected_api() {
+  var update = {
+    title: 'New Title',
+    'xaxis.range': [0,1],
+    yaxis: {
+      showgrid: true,
+      zeroline: true,
+      showline: true,
+      mirror: 'ticks',
+      gridcolor: '#bdbdbd',
+      gridwidth: 2,
+      zerolinecolor: '#969696',
+      //zerolinewidth: 4,
+    }
+  }
+
+
   if(amount_times_pressed != 0 ){
    document.getElementById("tester").remove();
-   $('#output_graph').append('<div id="tester" style="width:600px;height:250px;"></div>');
+   $('#output_graph').append('<div id="tester" style="width:600px;height:600px;"></div>');
+
    Plotly.newPlot('tester', update);
    invoke('get_selected', { invokeMessage: sellected }).then((message) => perpare_plot(message,sellected))
   }
   else {
  invoke('get_selected', { invokeMessage: sellected }).then((message) => perpare_plot(message,sellected))
   }
-
  amount_times_pressed=amount_times_pressed+1;
 }
 function generate_array(size){
@@ -79,7 +81,6 @@ function generate_array(size){
     return y_array;
   }
 function perpare_plot(argument,sellected) {
-
 var  data=[];
   for (let a =0 ; a<argument.length; a++){
     var trace = {
@@ -90,32 +91,40 @@ var  data=[];
     };
     data.push(trace)
   }
-
 Plotly.newPlot('tester', data);
   // body...
 }
   </script>
-
-
   <body onload="init()">
-    <button onclick="select_file()">Open log</button>
+
+    <div class="row">
+
+ <div class="column">
+   <button class="desktop-ui-button-yellow"  onclick="sellected_api()"> Save</button>
+     <div id="checkboxes">
+
+     </div>
+
+ </div>
+
+ <div class="column">
+
+           <div id="output_graph">
+           <div id="tester" style="width:600px;height:600px;"></div>
+ </div>
+</div>
+
     <header>
-        <div id="checkboxes">
-          <ul class="checkbox">
 
 
-        </div>
-        <div id="output_graph">
-        <div id="tester" style="width:600px;height:250px;"></div>
+
+
       </div>
     </header>
     <main></main>
 
-    <button  onclick="sellected_api()"> Save</button>
     <footer></footer>
     <script>
-
-
 </script>
   </body>
 </html>
