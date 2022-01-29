@@ -45,8 +45,13 @@ Then install api via
 yarn add @tauri-apps/api
 ```
 
+
+
+
 and finally run 
 ```
 yarn tauri dev 
 ```
 
+
+https://user-images.githubusercontent.com/20460747/151638596-9c542b81-31a7-4d24-870e-f6d066611a76.mp4
