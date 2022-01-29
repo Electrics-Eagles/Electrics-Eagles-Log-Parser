@@ -16,7 +16,7 @@ sudo pacman -Syy && sudo pacman -S  webkit2gtk \
     patchelf \
     librsvg \
     libvips
-    ```
+```
  Then install nvm
 ```
  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
@@ -46,6 +46,7 @@ yarn add @tauri-apps/api
 ```
 
 and finally run 
-``
+```
 yarn tauri dev 
 ```
+
