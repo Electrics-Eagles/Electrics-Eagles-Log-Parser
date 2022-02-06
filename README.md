@@ -28,7 +28,7 @@ nvm use node
 ```
 Then install yarn : 
 ```
-npm install --global yar
+npm install --global yarn
 ```
 
 Then install Rust 
