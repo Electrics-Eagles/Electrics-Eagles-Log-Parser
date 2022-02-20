@@ -5,8 +5,10 @@
     <title></title>
    <script src="./jquery.js"></script>
     <script src="./plotly.js"></script>
+    <script src="./ResizeSensor.js"></script>
+<script src="./ElementQueries.js"></script>
    <link rel="stylesheet" href="styles.css"></link>
-  </head>
+
   <script type="text/javascript">
 
       const invoke = window.__TAURI__.invoke
@@ -21,7 +23,7 @@ names = [ "acc_x", "acc_y", "acc_z", "gyro_x", "gyro_y", "gyro_z", "angle_pitch_
   function init() {
   for (let i = 0; i < names.length; i++) {
     let checkbox_id="checkbox_"+i;
-    let generated_html=`<li><input type="checkbox" class="btn-styled" style="list-style-type: none;" id="${checkbox_id}"  type="button">${names[i]}</input></li>`
+    let generated_html=`<li style="list-style-type:none;" ><input type="checkbox" class="btn-styled" style="list-style-type: none;" id="${checkbox_id}"  type="button">${names[i]}</input></li>`
     $('#checkboxes').append(generated_html);
     const checkbox = document.getElementById(checkbox_id)
 checkbox.addEventListener('change', (event) => {
@@ -53,10 +55,20 @@ function sellected_api() {
     }
   }
 
+  let container=document.getElementById('tester');
+  new ResizeSensor(container, function(){
+      console.log(container.clientHeight);
 
+      var update = {
+        width:  container.clientWidth,  // or any new width
+        height: container.clientHeight  // " "
+      };
+
+      Plotly.relayout('tester', update);
+  });
   if(amount_times_pressed != 0 ){
    document.getElementById("tester").remove();
-   $('#output_graph').append('<div id="tester" style="width:600px;height:600px;"></div>');
+   $('#colum_two').append('<div id="tester" ></div>');
 
    Plotly.newPlot('tester', update);
    invoke('get_selected', { invokeMessage: sellected }).then((message) => perpare_plot(message,sellected))
@@ -96,35 +108,16 @@ Plotly.newPlot('tester', data);
 }
   </script>
   <body onload="init()">
-
-    <div class="row">
-
- <div class="column">
-   <button class="desktop-ui-button-yellow"  onclick="sellected_api()"> Save</button>
-     <div id="checkboxes">
-
-     </div>
-
- </div>
-
- <div class="column">
-
-           <div id="output_graph">
-           <div id="tester" style="width:600px;height:600px;"></div>
- </div>
-</div>
-
-    <header>
-
-
-
+    <div class="main_div">
+    <div class="colum_one">
+    <button class="desktop-ui-button-yellow"  onclick="sellected_api()"> Save</button>
+      <div id="checkboxes">
 
       </div>
-    </header>
-    <main></main>
+    </div>
+    <div class="colum_two">
+       <div id="tester"></div>
+   </div>
+</div>
 
-    <footer></footer>
-    <script>
-</script>
-  </body>
-</html>
+</body>

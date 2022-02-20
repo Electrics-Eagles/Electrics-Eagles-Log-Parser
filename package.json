@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1.0.0-beta.8",
+    "css-element-queries": "^1.2.3",
     "plotly.js-dist": "^2.8.3"
   }
 }

@@ -17,30 +17,6 @@
  }
 
 
- /*
- DEBE62
- C99DA8
- 5C4453
- 282838
- 1B3255
-
-
-
- e3b505
- 95190C
- 610345
- 107E7D
- 044B7F
-
-
-
- contract colors
-
- blue = #1D65EF
- yellow = #ECCC00
- */
-
-
  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
  .desktop-ui-button-yellow {
@@ -66,62 +42,14 @@
    animation: ripple 600ms linear;
    background-color: rgba(255, 255, 255, 0.7);
  }
+ .main_div {
+   display: grid;
+   grid-template-columns: 25% 75%;
+}
 
-
- .bottom_bar {
-     background-color:#1D65EF ;
-     position: fixed;
-     z-index: 100;
-     bottom: 0;
-     left: 0;
-     width: 100%;
-     height: 20px;
-     color: #ffff;
-
-
- }
- .bottom_bar_status {
-   font-size: 14px;
-
-
- }
-
-
- body{
-    background-color: #f3f5f9;
- }
-
- .wrapper{
-   display: flex;
-   position: relative;
- }
-
- .wrapper .sidebar{
-   width: 50px;
-   height: 100%;
-   background: #1D65EF;
-   position: fixed;
-
-
- }
- ul{
-   list-style-type: none;
- }
-
- .wrapper .sidebar h2{
-   color: #fff;
-   text-transform: uppercase;
-   text-align: center;
-   margin-bottom: 30px;
- }
-
- .wrapper .sidebar ul li{
-   border-bottom: 1px solid #1D65EF;
-   border-bottom: 1px solid rgba(0,0,0,0.05);
-   border-top: 1px solid rgba(255,255,255,0.05);
- }
-
- .wrapper .main_content{
-   width: 100%;
-   margin-left: 200px;
- }
+/* Clear floats after the columns */
+.main_div:after {
+  content: "";
+  display: table;
+  clear: both;
+}
