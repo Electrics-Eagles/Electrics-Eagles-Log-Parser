@@ -1,5 +1,5 @@
 # Electrics-Eagles-Log-Parser
-
+[![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 
 Run :
 on Manjaro :
