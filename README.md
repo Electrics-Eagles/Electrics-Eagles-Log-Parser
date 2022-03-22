@@ -55,3 +55,14 @@ yarn tauri dev
 
 
 https://user-images.githubusercontent.com/20460747/151638596-9c542b81-31a7-4d24-870e-f6d066611a76.mp4
+
+
+
+Todo: 
+ - [ ] Resize vertically/ horizontally
+ - [x] Open file twice
+ - [ ] Plugin API
+- [ ] Checkbox styles
+ - [ ] Bug fix
+ - [ ] Icons
+ - [ ] Make common styles
