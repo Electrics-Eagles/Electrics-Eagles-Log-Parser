@@ -68,7 +68,7 @@ function sellected_api() {
   });
   if(amount_times_pressed != 0 ){
    document.getElementById("tester").remove();
-   $('#colum_two').append('<div id="tester" ></div>');
+   $('#colum_of_the_graph').append('<div id="tester" ></div>');
 
    Plotly.newPlot('tester', update);
    invoke('get_selected', { invokeMessage: sellected }).then((message) => perpare_plot(message,sellected))
@@ -115,7 +115,7 @@ Plotly.newPlot('tester', data);
 
       </div>
     </div>
-    <div class="colum_two">
+    <div class="colum_two" id="colum_of_the_graph">
        <div id="tester"></div>
    </div>
 </div>
